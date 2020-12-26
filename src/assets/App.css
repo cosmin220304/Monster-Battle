@@ -7,8 +7,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+  text-align: center;
+  animation-name: floatUpAndDown;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes floatUpAndDown {
+  0% {
+    transform: translate(0, 2.5rem);
+  }
+
+  50% {
+    transform: translate(0, 1rem);
+  }
+
+  100% {
+    transform: translate(0, 2.5rem);
+  }
+}
+
 .Scene {
-  padding: 10rem 2rem;
+  padding: 2rem;
   display: grid;
   grid-gap: 2rem;
 }
@@ -40,7 +62,7 @@ body {
   background-color: green;
 }
 
-.Spells {
+.SpellList {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 2rem;
@@ -62,4 +84,11 @@ button:active {
 .Start_New_Game {
   text-align: center;
   margin: 0 15rem;
+}
+
+.History_Item {
+  width: 40rem;
+  background-color: rgb(53, 53, 53);
+  color: white;
+  margin: 0.2rem;
 }

@@ -1,39 +1,26 @@
 import React, { useState } from 'react'
-import Character from '../character'
-import Spell from '../spell'
 import useGameLogic from '../../utils/UseGameLogic'
+import Character from '../character'
+import SpellList from '../spell_list'
+import PlayAgainButton from '../common/PlayAgainButton'
+import MovesHistory from '../moves_history'
 import '../../assets/App.css'
 
 function Scene () {
   const [playerHp, setPlayerHp] = useState(100)
   const [monsterHp, setMonsterHp] = useState(100)
-  const [playerMove, gameEnded, StartGame] = useGameLogic({ playerHp, setPlayerHp, monsterHp, setMonsterHp })
-
-  const renderButtons = () => {
-    if (gameEnded) {
-      return (
-      <button className="Start_New_Game" onClick={StartGame} >
-        Play again
-      </button>
-      )
-    }
-    return (
-      <div className="Spells">
-        <Spell name="Attack" spellFunction={() => playerMove('Attack')} />
-        <Spell name="Special Attack" spellFunction={() => playerMove('SpecialAttack')} />
-        <Spell name="Heal" spellFunction={() => playerMove('Heal')} />
-        <Spell name="Flee" spellFunction={() => playerMove('Flee')} />
-      </div>
-    )
-  }
+  const [playerAction, gameEnded, startGame] = useGameLogic({ playerHp, setPlayerHp, monsterHp, setMonsterHp })
 
   return (
     <div className="Scene">
-      <div className="Characters">
+      <h1> 👨🏻 Monster Battle 👾 </h1>
+      <div className="Characters" >
         <Character isPlayer={true} hp={playerHp} />
         <Character isPlayer={false} hp={monsterHp} />
       </div>
-      {renderButtons()}
+      <SpellList playerAction={playerAction} gameEnded={gameEnded} />
+      <PlayAgainButton startGame={startGame} gameEnded={gameEnded} />
+      <MovesHistory />
     </div>
   )
 }

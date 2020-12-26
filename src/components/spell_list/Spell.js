@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 
-const Spell = ({ name, spellFunction }) => {
+const Spell = ({ name, spell }) => {
   return (
-    <button className="Spell" onClick={spellFunction}>
+    <button className="Spell" onClick={spell}>
         {name}
     </button>
   )

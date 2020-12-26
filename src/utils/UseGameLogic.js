@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import useAbilities from './UseAbilities'
+import { useHistoryDelete } from './HistoryContext'
 
 const UseGameLogic = ({ playerHp, setPlayerHp, monsterHp, setMonsterHp }) => {
   const [turn, setTurn] = useState('Player')
   const [gameEnded, setGameEnded] = useState(false)
   const [attack, specialAttack, heal, flee] = useAbilities({ setPlayerHp, setMonsterHp, setTurn, setGameEnded })
-  const stringToFunction = {
+  const deleteMoves = useHistoryDelete()
+
+  const actionsMap = {
     Attack: attack,
     SpecialAttack: specialAttack,
     Heal: heal,
@@ -13,6 +16,7 @@ const UseGameLogic = ({ playerHp, setPlayerHp, monsterHp, setMonsterHp }) => {
   }
 
   const StartGame = () => {
+    deleteMoves()
     setMonsterHp(100)
     setPlayerHp(100)
     setTurn('Player')
@@ -41,7 +45,7 @@ const UseGameLogic = ({ playerHp, setPlayerHp, monsterHp, setMonsterHp }) => {
 
   useEffect(() => {
     if (turn === 'Monster') {
-      monsterMove()
+      monsterAction()
     }
   }, [turn])
 
@@ -49,18 +53,20 @@ const UseGameLogic = ({ playerHp, setPlayerHp, monsterHp, setMonsterHp }) => {
     if (gameEnded) {
       if (playerHp <= 0) {
         alert('Monster won!')
+        setPlayerHp(0)
       } else if (monsterHp <= 0) {
         alert('Player won!')
+        setMonsterHp(0)
       }
     }
   }, [gameEnded])
 
-  const monsterMove = async () => {
+  const monsterAction = async () => {
     // normal attack: 49%
     // special attack: 24%
     // heal: 24%
     // flee: 3%
-    await new Promise(resolve => setTimeout(resolve, 200)) // Sleep 0.2 seconds
+    await new Promise(resolve => setTimeout(resolve, 200)) // Sleep for 0.2 seconds
     const spellChance = Math.floor(Math.random() * 100)
     if (spellChance < 49) {
       attack('Monster')
@@ -73,15 +79,15 @@ const UseGameLogic = ({ playerHp, setPlayerHp, monsterHp, setMonsterHp }) => {
     }
   }
 
-  const playerMove = (spellString) => {
+  const playerAction = (action) => {
     if (turn === 'Player') {
-      stringToFunction[spellString]('Player')
+      actionsMap[action]('Player')
     } else {
       alert('Not your turn!')
     }
   }
 
-  return [playerMove, gameEnded, StartGame]
+  return [playerAction, gameEnded, StartGame]
 }
 
 export default UseGameLogic
