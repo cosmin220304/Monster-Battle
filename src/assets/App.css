@@ -7,46 +7,59 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.Scene {
+  padding: 10rem 2rem;
+  display: grid;
+  grid-gap: 2rem;
 }
 
-.App {
+.Characters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+}
+
+.Name {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.HP {
+  background-color: rgb(221, 221, 221);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.HP .Bar {
+  height: 2rem;
+  background-color: red;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.HP .Bar .Health {
+  height: 2rem;
+  background-color: green;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.Spells {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+button {
+  height: 5rem;
+  background-color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:hover {
+  background-color: rgb(185, 185, 185);
+}
+
+button:active {
+  background-color: rgb(53, 53, 53);
+}
+
+.Start_New_Game {
+  text-align: center;
+  margin: 0 15rem;
 }
