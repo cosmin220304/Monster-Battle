@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import Character from '../character'
 import Spell from '../spell'
-import GameLogic from '../../utils/UseGameLogic'
+import useGameLogic from '../../utils/UseGameLogic'
 import '../../assets/App.css'
 
 function Scene () {
   const [playerHp, setPlayerHp] = useState(100)
-  const [enemyHp, setEnemyHp] = useState(100)
-  const [playerMove, attack, specialAttack, heal, flee, gameEnded, StartGame] = GameLogic({ playerHp, setPlayerHp, enemyHp, setEnemyHp })
+  const [monsterHp, setMonsterHp] = useState(100)
+  const [playerMove, gameEnded, StartGame] = useGameLogic({ playerHp, setPlayerHp, monsterHp, setMonsterHp })
 
   const renderButtons = () => {
     if (gameEnded) {
@@ -19,10 +19,10 @@ function Scene () {
     }
     return (
       <div className="Spells">
-        <Spell name="Attack" spellFunction={() => playerMove(attack)} />
-        <Spell name="Special Attack" spellFunction={() => playerMove(specialAttack)} />
-        <Spell name="Heal" spellFunction={() => playerMove(heal)} />
-        <Spell name="Flee" spellFunction={() => playerMove(flee)} />
+        <Spell name="Attack" spellFunction={() => playerMove('Attack')} />
+        <Spell name="Special Attack" spellFunction={() => playerMove('SpecialAttack')} />
+        <Spell name="Heal" spellFunction={() => playerMove('Heal')} />
+        <Spell name="Flee" spellFunction={() => playerMove('Flee')} />
       </div>
     )
   }
@@ -31,7 +31,7 @@ function Scene () {
     <div className="Scene">
       <div className="Characters">
         <Character isPlayer={true} hp={playerHp} />
-        <Character isPlayer={false} hp={enemyHp} />
+        <Character isPlayer={false} hp={monsterHp} />
       </div>
       {renderButtons()}
     </div>
