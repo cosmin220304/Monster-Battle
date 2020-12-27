@@ -11,7 +11,7 @@ const UseAbilities = ({ setPlayerHp, setMonsterHp, setTurn, setGameEnded }) => {
   }
 
   const attack = (attacker) => {
-    const move = `${attacker} used normal attack!`
+    const move = `${attacker} used normal attacke (10 damage).`
 
     if (attacker === 'Player') {
       setMonsterHp(prev => prev - 10)
@@ -24,8 +24,8 @@ const UseAbilities = ({ setPlayerHp, setMonsterHp, setTurn, setGameEnded }) => {
   }
 
   const specialAttack = (attacker) => {
-    let move = `${attacker} used special attack!`
     const damageAmount = Math.round(Math.random() * 20)
+    let move = `${attacker} used special attack (${damageAmount} damage).`
 
     if (attacker === 'Player') {
       setMonsterHp(prev => prev - damageAmount)
@@ -46,8 +46,8 @@ const UseAbilities = ({ setPlayerHp, setMonsterHp, setTurn, setGameEnded }) => {
   }
 
   const heal = (healer) => {
-    let move = `${healer} used healing!`
     const healAmount = Math.round(Math.random() * 20)
+    let move = `${healer} used healing (${healAmount} hp)`
 
     if (healer === 'Player') {
       setPlayerHp(prev => prev + healAmount)
