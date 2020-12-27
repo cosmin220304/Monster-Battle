@@ -41,4 +41,5 @@ You are fighting a monter and have 4 skills to choose from. Both you and the mon
 * Special attacks can deal anywhere between 0 and 20 damage
 * Heals will heal you between 0 and 20 hp
 * Fleeing will end the game early (monsters have a 3% to flee)  
-Either the player of the monster wins if his opponent reaches 0 hp.
+
+Either the player or the monster wins if his opponent reaches 0 hp.
